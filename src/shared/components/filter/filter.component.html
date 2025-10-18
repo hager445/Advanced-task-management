@@ -1,0 +1,90 @@
+<!-- Filters Bar -->
+<div class="filters-bar">
+  <div class="filters-content">
+    <div class="search-container">
+      <i class="fas fa-search search-icon"></i>
+      <input
+        (input)="selectSearchValue($event)"
+        type="text"
+        class="search-input"
+        placeholder="Search tasks..."
+      />
+    </div>
+
+    <div class="sort-dropdown-container">
+      <div
+        class="sort-dropdown"
+        [class.open]="isOpened['sortingDropdown']"
+        (click)="toggleDropdown('sortingDropdown')"
+      >
+        <div class="sort-label">
+          <i class="fas fa-sort sort-icon"></i>
+          <span class="sort-text" id="sortText1">{{
+            selectedValues["sortingValue"] || "Recent"
+          }}</span>
+        </div>
+        <i class="fas fa-chevron-down dropdown-arrow"></i>
+      </div>
+      <div
+        class="sort-menu"
+        id="sortMenu1"
+        [class.show]="isOpened['sortingDropdown']"
+      >
+        @for (so of sortOptions; track $index) {
+
+        <div
+          class="sort-option"
+          [class.selected]="so.value === selectedValues['sortingValue']"
+          (click)="selectSortValue(so.value)"
+        >
+          <i [class]="'fas' + ' ' + so.icon"></i>
+          <span>{{ so.label }}</span>
+        </div>
+        }
+      </div>
+    </div>
+    <div class="sort-dropdown-container">
+      <div
+        class="sort-dropdown"
+        [class.open]="isOpened['priorityDropdown']"
+        (click)="toggleDropdown('priorityDropdown')"
+      >
+        <div class="sort-label">
+          <i class="fas fa-sort sort-icon"></i>
+          <span class="sort-text" id="sortText1">{{
+            selectedValues["priorityValue"] || "All Tasks"
+          }}</span>
+        </div>
+        <i class="fas fa-chevron-down dropdown-arrow"></i>
+      </div>
+      <div
+        class="sort-menu"
+        id="sortMenu1"
+        [class.show]="isOpened['priorityDropdown']"
+      >
+        @for (pr of priorityOptions; track $index) {
+        <div
+          class="sort-option"
+          [class.selected]="pr.value === selectedValues['priorityValue']"
+          (click)="selectPriorityValue(pr.value)"
+        >
+          <i [class]="'fas' + ' ' + pr.icon"></i>
+          <span>{{ pr.label }}</span>
+        </div>
+        }
+      </div>
+    </div>
+    <div class="view-toggle">
+      @for (bt of toggleView; track $index) {
+
+      <button
+        class="view-btn"
+        [class.active]="bt.isActive"
+        (click)="onToggleView($index)"
+      >
+        <i [class]="bt.icon"></i>
+      </button>
+      }
+    </div>
+  </div>
+</div>

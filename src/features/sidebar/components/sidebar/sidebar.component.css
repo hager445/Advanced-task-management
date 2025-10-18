@@ -1,0 +1,225 @@
+/* Sidebar Styles */
+.sidebar {
+  /* position: fixed;
+  top: 100px;
+  overflow: scroll;
+  bottom: 0;
+  left: 0; */
+  width: 300px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 25px;
+  height: fit-content;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Section Styles */
+.sidebar-section {
+  margin-bottom: 30px;
+}
+
+.sidebar-section:last-child {
+  margin-bottom: 0;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #e2e8f0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.section-title i {
+  color: #667eea;
+  font-size: 18px;
+}
+
+/* Sidebar Items */
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 6px;
+  color: #cbd5e1;
+  font-weight: 500;
+}
+
+.sidebar-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  transform: translateX(3px);
+}
+
+.sidebar-item.active {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.sidebar-item i {
+  width: 18px;
+  text-align: center;
+}
+
+/* Organization List Items */
+.org-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 6px;
+  color: #cbd5e1;
+  font-weight: 500;
+  position: relative;
+}
+
+.org-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  transform: translateX(3px);
+}
+
+.org-item.active {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.org-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: white;
+  font-weight: bold;
+}
+
+.org-members {
+  margin-left: auto;
+  font-size: 11px;
+  color: #94a3b8;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 2px 8px;
+  border-radius: 12px;
+}
+
+.org-item.active .org-members {
+  background: rgba(255, 255, 255, 0.2);
+  color: #e2e8f0;
+}
+
+/* Categories Section */
+.category-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 4px;
+  color: #cbd5e1;
+  font-size: 14px;
+}
+
+.category-item:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: white;
+}
+
+.category-color {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.category-count {
+  margin-left: auto;
+  font-size: 11px;
+  color: #64748b;
+}
+
+/* Main Content Area */
+.main-content {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 30px;
+  min-height: 600px;
+}
+
+.content-header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 20px;
+  margin-bottom: 30px;
+}
+
+.content-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #e2e8f0;
+}
+.logout-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #24244e;
+  color: #fff;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  margin-top: 40px;
+}
+
+.logout-btn .icon {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+  transition: transform 0.3s ease;
+}
+
+/* Hover effect */
+.logout-btn:hover {
+  background-color: #32327a;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+}
+
+.logout-btn:hover .icon {
+  transform: translateX(-3px);
+}
+
+/* Optional active effect */
+.logout-btn:active {
+  transform: scale(0.97);
+}

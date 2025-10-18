@@ -1,0 +1,100 @@
+<div class="tasks" [class.cubic]="viewList()">
+  @for ( ts of $filteredTasks(); track $index) {
+  <div class="task-card priority-high">
+    <div class="task-header">
+      <div class="task-title-section">
+        <div class="task-title">{{ ts.title }}</div>
+        <div class="task-id">TASK-{{ ts.task_id.slice(0, 3) }}</div>
+      </div>
+      <div class="task-actions">
+        <button
+          class="action-btn edit"
+          title="Edit"
+          (click)="updateTask(ts.task_id, ts)"
+        >
+          <i class="fas fa-edit"></i>
+        </button>
+        <button
+          class="action-btn delete"
+          title="Delete"
+          (click)="deleteTask(ts.task_id)"
+        >
+          <i class="fas fa-trash"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="priority-badge" [ngClass]="'priority-' + ts.priority">
+      <i class="fas fa-arrow-up"></i>
+      {{ ts.priority }}
+    </div>
+
+    <div class="task-description">
+      {{ ts.description }}
+    </div>
+
+    <!-- Categories Section -->
+    <div class="categories-section">
+      <div class="categories-label">Categories</div>
+      <div class="categories-container">
+        @if (ts.category_id) {
+        <span class="category-tag">
+          <i class="fas fa-tag"></i>
+          {{ ts.category_id | iDtoName : "id" : $categories || [] : "name" }}
+          <i
+            class="fas fa-times remove-icon"
+            (click)="deleteCategoryItem(ts.task_id)"
+          ></i>
+        </span>
+        }
+        <button
+          class="add-category-btn"
+          title="Add category"
+          (click)="addCategory(ts.task_id)"
+        >
+          <i class="fas fa-plus"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="task-meta">
+      <div class="task-assignee">
+        <div class="assignee-avatar">
+          {{
+            ts.assigned_to
+              | iDtoName
+                : "user_id"
+                : $allMembersOfCurrentSystem() || []
+                : "user_name"
+              | badge
+          }}
+        </div>
+        <span>{{
+          ts.assigned_to
+            | iDtoName
+              : "user_id"
+              : $allMembersOfCurrentSystem() || []
+              : "user_name"
+        }}</span>
+      </div>
+      <div class="task-date">
+        <i class="fas fa-calendar"></i>
+        {{ ts.due_date | date }}
+      </div>
+    </div>
+
+    <div class="task-footer">
+      <div class="status-badge" [ngClass]="'status-' + ts.status">
+        <i class="fas fa-spinner"></i>
+        {{ ts.status }}
+      </div>
+      <div class="task-progress">
+        <div class="task-progress-fill" style="width: 65%"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======== -->
+
+  }
+</div>

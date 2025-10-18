@@ -1,0 +1,40 @@
+<div class="task-list-container">
+  <!-- filter task -->
+  <app-filter></app-filter>
+  <!-- Task Statistics -->
+  <div class="task-stats">
+    <div class="stat-card total">
+      <div class="stat-icon">
+        <i class="fas fa-tasks"></i>
+      </div>
+      <div class="stat-number">{{ $tasks.length }}</div>
+      <div class="stat-label">Total Tasks</div>
+    </div>
+    <div class="stat-card pending">
+      <div class="stat-icon">
+        <i class="fas fa-clock"></i>
+      </div>
+      <div class="stat-number">{{ filteredTasks.pendingTasks.length }}</div>
+      <div class="stat-label">Pending</div>
+    </div>
+    <div class="stat-card progress">
+      <div class="stat-icon">
+        <i class="fas fa-spinner"></i>
+      </div>
+      <div class="stat-number">{{ filteredTasks.inProgressTasks.length }}</div>
+      <div class="stat-label">In Progress</div>
+    </div>
+    <div class="stat-card completed">
+      <div class="stat-icon">
+        <i class="fas fa-check"></i>
+      </div>
+      <div class="stat-number">{{ filteredTasks.completedTasks.length }}</div>
+      <div class="stat-label">Completed</div>
+    </div>
+  </div>
+
+  <!-- Tasks Grid -->
+  <!-- <div class="tasks" [class.cubic]="viewList()"> -->
+  <app-task-card></app-task-card>
+  <!-- </div> -->
+</div>

@@ -1,0 +1,41 @@
+<div
+  class="modal-overlay"
+  (click)="closeSearchModel($event)"
+  [class.show]="$orgMembersModelIsOpened()"
+>
+  <div class="section-container members-container">
+    <div class="section-header">
+      <div class="section-title">
+        <i class="fas fa-users"></i>
+        Members of {{$currentOrgMembers()?.[0].organization_name || 'Unknown'}}
+      </div>
+    </div>
+
+    <div class="members-list">
+      @for (member of $currentOrgMembers(); track $index) {
+      <div class="member-item">
+        <div class="member-avatar">{{ member?.user_name | badge }}</div>
+        <div class="member-info">
+          <div class="member-name">{{ member?.user_name }}</div>
+          <div class="member-role">{{ member.role }}</div>
+        </div>
+        @if (member.role!=='admin') {
+
+        <div
+          class="member-remove"
+          (click)="deleteMember(member.user_id, member.created_by)"
+        >
+          <i class="fas fa-times"></i>
+        </div>
+        }
+      </div>
+      }
+    </div>
+
+    <!-- Empty state when no members -->
+    <!-- <div class="members-empty">
+    <i class="fas fa-user-slash"></i>
+    No members yet
+  </div> -->
+  </div>
+</div>

@@ -1,0 +1,174 @@
+<!-- Assignee Dropdown -->
+@if ($isSearchedInTaskForm()) {
+<div
+  class="modal-overlay"
+  [class.show]="$searchModelIsOpened()"
+  (click)="closeSearchModel($event)"
+>
+  <div class="form-group search-container">
+    <div class="dropdown-container">
+      <div
+        class="dropdown-trigger"
+        (click)="toggleMenu()"
+        id="assigneeDropdown"
+      >
+        <!-- show up result -->
+        <div class="dropdown-value" id="dropdownValue">
+          <div
+            class="no-results"
+            id="noResults"
+            *ngIf="$currentOrgMembersInTaskForm()?.length === 0"
+          >
+            No team members matched
+          </div>
+
+          <span
+            class="dropdown-placeholder"
+            *ngIf="
+              $selectedtaskMember() &&
+              $currentOrgMembersInTaskForm()?.length !== 0
+            "
+            >{{ $selectedtaskMember()?.user_name }}
+          </span>
+
+          <div
+            class="no-results"
+            id="noResults"
+            *ngIf="
+              !$selectedtaskMember() &&
+              $currentOrgMembersInTaskForm()?.length !== 0
+            "
+          >
+            please select a user
+          </div>
+
+          <div class="add-member-btn" (click)="addNewMemberToCurrentOrg()">
+            add a member
+            <i class="fas fa-check dropdown-icon"></i>
+          </div>
+        </div>
+        <!-- <i class="fas fa-chevron-down dropdown-arrow"></i> -->
+      </div>
+      <div class="dropdown-menu" [class.show]="isOpenedMenu" id="dropdownMenu">
+        <div class="dropdown-search">
+          <input
+            type="text"
+            class="search-input"
+            formControlName="created_by"
+            placeholder="Search team members..."
+            #input
+            id="searchInput"
+            (focus)="fetchMembersInTaskForm()"
+          />
+        </div>
+
+        <div id="optionsList">
+          @for (user of $currentOrgMembersInTaskForm(); track $index) {
+
+          <div class="dropdown-option" (click)="selectOption(user)">
+            <div class="user-avatar">{{ user.user_name | badge }}</div>
+            <div class="user-info">
+              <div class="user-name">{{ user.user_email }}</div>
+              <!-- <div class="user-role">Product Manager</div> -->
+            </div>
+          </div>
+          }
+        </div>
+
+        <div class="no-results" id="noResults" style="display: none">
+          No team members found
+        </div>
+      </div>
+    </div>
+    <div class="form-validation" id="assigneeValidation">
+      <i class="fas fa-exclamation-circle"></i>
+      <span>Please select an assignee</span>
+    </div>
+  </div>
+</div>
+}@else {
+
+<!-- Assignee Dropdown -->
+<div
+  class="modal-overlay"
+  [class.show]="$searchModelIsOpened()"
+  (click)="closeSearchModel($event)"
+>
+  <div class="form-group search-container">
+    <div class="dropdown-container">
+      <div
+        class="dropdown-trigger"
+        (click)="toggleMenu()"
+        id="assigneeDropdown"
+      >
+        <!-- show up result -->
+        <div class="dropdown-value" id="dropdownValue">
+          <div
+            class="no-results"
+            id="noResults"
+            *ngIf="$autoCompleteList()?.length === 0"
+          >
+            No team members matched
+          </div>
+
+          <span
+            class="dropdown-placeholder"
+            *ngIf="$selectedOrgMember() && $autoCompleteList()?.length !== 0"
+            >{{ $selectedOrgMember()?.name }}
+          </span>
+
+          <div
+            class="no-results"
+            id="noResults"
+            *ngIf="!$selectedOrgMember() && $autoCompleteList()?.length !== 0"
+          >
+            please select a user
+          </div>
+
+          <div class="add-member-btn" (click)="addNewMemberToCurrentOrg()">
+            add a member
+            <i class="fas fa-check dropdown-icon"></i>
+          </div>
+        </div>
+        <!-- <i class="fas fa-chevron-down dropdown-arrow"></i> -->
+      </div>
+      <div class="dropdown-menu" [class.show]="isOpenedMenu" id="dropdownMenu">
+        <div class="dropdown-search">
+          <input
+            type="text"
+            class="search-input"
+            formControlName="created_by"
+            placeholder="Search team members..."
+            #input
+            id="searchInput"
+          />
+        </div>
+
+        <div id="optionsList">
+          @for (user of $autoCompleteList(); track $index) {
+
+          <div class="dropdown-option" (click)="selectOption(user)">
+            <div class="user-avatar">{{ user.name | badge }}</div>
+            <div class="user-info">
+              <div class="user-name">{{ user.email }}</div>
+              @if (user.id === $user_id()) {
+              <span>(you are already exist!)</span>
+              }
+              <!-- <div class="user-role">Product Manager</div> -->
+            </div>
+          </div>
+          }
+        </div>
+
+        <div class="no-results" id="noResults" style="display: none">
+          No team members found
+        </div>
+      </div>
+    </div>
+    <div class="form-validation" id="assigneeValidation">
+      <i class="fas fa-exclamation-circle"></i>
+      <span>Please select an assignee</span>
+    </div>
+  </div>
+</div>
+}

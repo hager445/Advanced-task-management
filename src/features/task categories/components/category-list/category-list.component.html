@@ -1,0 +1,87 @@
+@if (!isSideBar) {
+<div class="category-manager">
+  <!-- Header -->
+  <div class="manager-header">
+    <div class="manager-title">
+      <div class="title-icon">
+        <i class="fas fa-folder"></i>
+      </div>
+      <span>Manage Categories</span>
+    </div>
+    <!-- <app-create-new-category (showForm)="showForm()"></app-create-new-category> -->
+  </div>
+
+  <!-- Categories Grid -->
+  <div class="categories-grid">
+    <!-- Work Category -->
+    @for (cat of $categories; track $index) {
+    <div class="category-card" [attr.style]="`--category-color:${cat.color}`">
+      <div class="category-header">
+        <div class="category-info">
+          <div
+            class="category-color"
+            [attr.style]="`background:${cat.color}`"
+          ></div>
+          <span class="category-name">{{ cat.name }}</span>
+        </div>
+        <div class="category-actions">
+          <button class="action-btn edit-btn" (click)="updateCategory(cat)">
+            <i class="fas fa-edit"></i>
+          </button>
+          <button
+            class="action-btn delete-btn"
+            (click)="deleteCategory(cat.id)"
+          >
+            <i class="fas fa-trash"></i>
+          </button>
+          @if ($isSelectedCategoryMode()) {
+          <label class="checkbox-wrapper">
+            <input
+              #cb
+              type="radio"
+              name="category"
+              class="checkbox-input radio-input"
+              [checked]="checkedCategory.ID === cat.id && checkedCategory.state"
+              (change)="assignCheckedCategory(cat.id, cb.checked)"
+            />
+            <span class="checkbox-custom radio-custom"></span>
+          </label>
+
+          }
+        </div>
+      </div>
+      <div class="category-stats">
+        <div class="task-count">
+          <i class="fas fa-tasks"></i>
+          <span>Tasks:</span>
+          <span class="count-number" [attr.style]="`background:${cat.color}`"
+            >12</span
+          >
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+  <!-- == -->
+  @if ($isSelectedCategoryMode()) {
+  <button type="submit" class="btn btn-primary" (click)="addCategoryToTask()">
+    <i class="fas fa-save"></i>
+    Add to task
+  </button>
+  }
+  <app-manage-categories #manageC></app-manage-categories>
+</div>
+}@else {
+<!-- if showing up in sidebar -->
+@for (cat of $categories; track $index) { @if($index === 0){
+
+<div class="category-header">
+  <div class="category-info">
+    <div
+      class="category-color smaller"
+      [attr.style]="`background:${cat.color}`"
+    ></div>
+    <span class="category-name t-12">{{ cat.name }}</span>
+  </div>
+</div>
+} } }

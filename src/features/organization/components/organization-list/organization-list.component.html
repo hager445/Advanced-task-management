@@ -1,0 +1,88 @@
+<!-- Existing Organizations -->
+<!-- <div class="parent-list"> -->
+<div
+  class="org-item"
+  [class.muted]="isMuted"
+  [class.active]="$personalOrg.id === $selectedOrganizationID()"
+  (mouseenter)="onPersonalMouseEnter()"
+  (mouseleave)="onPersonalMouseLeave()"
+  (click)="selectOrganization($personalOrg[0].id, $event, $personalOrg[0])"
+  *ngIf="$personalOrg && $personalOrg.length > 0"
+>
+  <div class="flex">
+    <div class="">
+      <span class="org-icon" [style.background]="'#1d4ed8'">
+        {{ $personalOrg[0].name | badge }}
+      </span>
+      <span class="org-name">{{ $personalOrg[0].name }}</span>
+    </div>
+    <div class="org-members">12</div>
+  </div>
+</div>
+<!-- <div
+  *ngIf="$organizations.length === 0 && $personalOrg.length === 0"
+  class="loading"
+>
+  Loading organizations...
+</div> -->
+@for (org of $organizations; track $index) { @if ( $index <=
+$organizations.length-1 && $index >= $organizations.length - showedListIndex())
+{
+
+<div
+  class="org-item"
+  [class.active]="org.id === $selectedOrganizationID()"
+  (click)="selectOrganization(org.id, $event, org)"
+>
+  <div class="flex">
+    <div class="">
+      <span
+        class="org-icon"
+        [style.background]="colors[$index % colors.length]"
+      >
+        {{ org.name | badge }}
+      </span>
+      <span class="org-name">{{ org.name }}</span>
+    </div>
+    <div class="org-members">12</div>
+  </div>
+  <!-- ====== -->
+  <div class="menu-container">
+    <button class="three-dots-btn" (click)="toggleMenu(org.id)">
+      <i class="fas fa-ellipsis-h"></i>
+    </button>
+    <div [class.show]="obj[org.id]" class="dropdown-menu">
+      <div class="menu-item show-org_btn" (click)="onShowMembers(org.id, org)">
+        <i class="fas fa-users"></i>
+        <span>Organization Members</span>
+      </div>
+      <div class="menu-item edit" (click)="onAddMembers(org.id, org)">
+        <i class="fas fa-user-plus"></i>
+        <span>Add Members</span>
+      </div>
+      <div class="menu-item edit" (click)="updateOrganization(org.id, org)">
+        <i class="fas fa-edit"></i>
+        <span>Edit</span>
+      </div>
+      <div class="menu-divider"></div>
+      <div class="menu-item delete" (click)="deleteOrganization(org.id, org)">
+        <i class="fas fa-trash"></i>
+        <span>Delete</span>
+      </div>
+    </div>
+  </div>
+</div>
+} }
+
+<!-- <div class="org-item">
+  <div
+    class="org-icon"
+    style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%)"
+  >
+    DT
+  </div>
+  <span>Dev Team</span>
+  <div class="org-members">5</div>
+</div> -->
+<!-- </div> -->
+<!-- <app-search #searchComponent></app-search> -->

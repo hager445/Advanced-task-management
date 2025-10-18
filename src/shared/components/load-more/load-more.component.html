@@ -1,0 +1,14 @@
+<!-- Icon Only Version -->
+@if (forLoadMore) {
+<button class="load-more-icon" (click)="loadMore()" title="Load More">
+  <i class="fas fa-chevron-down"></i>
+</button>
+<button class="load-less-icon" (click)="loadLess()" title="Load less">
+  <i class="fas fa-chevron-up"></i>
+</button>
+} @else {
+
+<button class="load-less-icon" (click)="onNavigateTo()" title="navigate to">
+  <i class="fas fa-arrow-right"></i>
+</button>
+}
