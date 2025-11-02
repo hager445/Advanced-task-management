@@ -18,9 +18,6 @@ inputsForm!:FormGroup;
 constructor(private fb:FormBuilder , private authService:AuthService,private toastrService:ToastrService,private router:Router ,private organizationService:OrganizationService,){}
 ngOnInit(): void {
   this.authService.loginIsOpened.set(false);
-  console.log('from register');
-  
-this.getAllEmails()
   this.inputsForm = this.fb.group({
     name:['',[  Validators.required]],
     email:['',[Validators.required,Validators.pattern(/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/)]],
@@ -35,21 +32,17 @@ closeRegister(){
 }
 onSubmit(){
   if (!this.inputsForm.valid) {
+    this.inputsForm.markAllAsTouched();
     this.toastrService.error('please insert valid values');
     return;
   }
   this.authService.register(this.inputsForm.value).subscribe({next:(res)=>{
-  
-    this.toastrService.success('Congrates! you have been registered');
+   this.toastrService.success('Congrates! you have been registered');
    
   }})
 }
 showPassword(e:Event){
   this.showPass = !this.showPass;
 }
-getAllEmails(){
-  // this.authService.getEmails().subscribe({next:(res)=>{
-  //   console.log(res);
-  // }})
-}
+
 }

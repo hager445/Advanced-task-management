@@ -96,8 +96,8 @@
               <i class="fas fa-eye" id="toggleIcon"></i>
             </button>
           </div>
-          @if (inputsForm.get('password')?.errors?.['minLength'] ||
-          inputsForm.get('password')?.errors?.['maxLength'] &&
+          @if ((inputsForm.get('password')?.errors?.['minlength'] ||
+          inputsForm.get('password')?.errors?.['maxlength']) &&
           inputsForm.get('password')?.touched) {
           <div class="form-error" id="passwordError">
             <i class="fas fa-exclamation-circle"></i>

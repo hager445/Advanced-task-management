@@ -11,6 +11,8 @@ import { SearchComponent } from '../../../../shared/components/search/search.com
 import { CloseopenmodelsService } from '../../../../shared/services/closeopenmodels/closeopenmodels.service';
 import { ToastrService } from 'ngx-toastr';
 import { EditaddformsService } from '../../../../shared/services/editaddforms/editaddforms.service';
+import { Subscription } from 'rxjs';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-organization-list',
@@ -41,12 +43,16 @@ export class OrganizationListComponent {
   isMatched:boolean = false;
   $organizations:any[]=[];
   $personalOrg:any;
-constructor(private closeOpenModelsService:CloseopenmodelsService,private organizationService:OrganizationService ,private taskService:TaskService,private Router:Router,private authService:AuthService ,private cd:ChangeDetectorRef,private storageService:StorageService,private toastrService:ToastrService,private editAddFormsService:EditaddformsService){
+  getOrganizationSubscription!:Subscription;
+constructor(private closeOpenModelsService:CloseopenmodelsService,private organizationService:OrganizationService ,private taskService:TaskService,private Router:Router,private authService:AuthService ,private cd:ChangeDetectorRef,private storageService:StorageService,private toastrService:ToastrService,private editAddFormsService:EditaddformsService,private spinner:NgxSpinnerService){
   effect(()=>{
-      if (this.$user_id()) 
-      this.organizationService.getOrganizations(this.$user_id()).subscribe();
-    
-  })
+    if (this.getOrganizationSubscription) 
+    this.getOrganizationSubscription?.unsubscribe();
+    if (this.$user_id()) 
+    this.getOrganizationSubscription =  this.organizationService.getOrganizations(this.$user_id()).subscribe({complete:()=>{
+    spinner.hide('loading');
+  }});
+      })
 }
  ngOnInit() {
    
@@ -105,7 +111,7 @@ deleteOrganization(currentID:string,org:any){
     this.toastrService.warning(`only admins can delete this organization!`)
     return;
   }
-this.organizationService.deleteOrganization(currentID);
+this.organizationService.deleteOrganization(currentID).subscribe({complete:()=>{this.spinner.hide('loading')}});
 
 }
 onPersonalMouseEnter(){

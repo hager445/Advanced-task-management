@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject, catchError, from, map, Observable, of, Subscription, switchMap, tap } from 'rxjs';
 import { AuthService } from '../../../auth/services/auth/auth.service';
 import { StorageService } from '../../../../shared/services/storage/storage.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Injectable({
   providedIn: 'root'
@@ -29,9 +30,11 @@ export class OrganizationService {
   private $orgs = new BehaviorSubject<any[]>([]);
   $orgsObservable = this.$orgs as Observable<any[]>
   getSystemMembersSubscription!:Subscription;
-  constructor(private toastrService:ToastrService,private storageService:StorageService) {
+  constructor(private toastrService:ToastrService,private storageService:StorageService,private spinner:NgxSpinnerService) {
     effect(()=>{
       // should trigger whenever ids change ;
+        this.getSystemMembersSubscription?.unsubscribe();
+
       this.getSystemMembersSubscription = this.getSystemMembers(this.orgSystemID.orgIDs()).subscribe();
     })
     effect(()=>{
@@ -51,7 +54,7 @@ export class OrganizationService {
     //   })
     }
   getOrganizations(userID:string|null){
-    console.log(userID);
+    this.spinner.show('loading');
     return from(supabase.from('user_organizations').select('organization_id').eq('user_id',userID)).pipe(
       tap(({data,error})=>{
         if(error)
@@ -214,12 +217,15 @@ export class OrganizationService {
 
   // =====
   deleteOrganization(orgID:string){
+        this.spinner.show('loading')
         return from(supabase.from('organizations').delete().eq('id',orgID)).pipe(
       tap(({data,error})=>{
         if (error) {
         throw new Error(error.message || 'couldnt delete this organization for some reasons!')
       }
       const notDeleted = this.$orgs.value.filter(c=>c.id !== orgID);
+      console.log(notDeleted);
+      
       this.$orgs.next(notDeleted);
       this.toastrService.success(`this organization is deleted!`);
         })

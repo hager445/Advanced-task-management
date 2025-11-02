@@ -1,11 +1,12 @@
 import { computed, effect, Injectable, signal } from '@angular/core';
-import { BehaviorSubject, catchError, from, map, Observable, of, tap } from 'rxjs';
+import { BehaviorSubject, catchError, from, map, Observable, of, Subscription, tap } from 'rxjs';
 import { supabase } from '../../../../enviroments/supabase';
 import { ToastrService } from 'ngx-toastr';
 import { error } from 'console';
 import { OrganizationService } from '../../../organization/services/organization/organization.service';
 import { AuthService } from '../../../auth/services/auth/auth.service';
 import { userInfo } from 'os';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Injectable({
   providedIn: 'root'
@@ -19,34 +20,43 @@ export class TaskService {
   $isSearchedInTaskForm=signal<boolean>(false);
   $todayTasks=signal<any[]>([]);
   $upcomingTasks=signal<any[]>([]);
-
+   getTasksSubscription!:Subscription;
   // i use it for filtering ;
+  private cache = new Map();
   private $tasks = new BehaviorSubject<any[]>([]);
   $tasksObservable = this.$tasks as Observable<any[]>;
   // for update task
   $updatedTask=signal<any>({})
-  constructor(private toastrService:ToastrService,private organizationService:OrganizationService,private authService:AuthService) {
+  constructor(private spinner:NgxSpinnerService,private toastrService:ToastrService,private organizationService:OrganizationService,private authService:AuthService) {
    
   effect(()=>{
+    if (this.getTasksSubscription)
+    this.getTasksSubscription.unsubscribe()
   if (this.$selectedOrganizationID())
-  this.getTasks().subscribe();
+ this.getTasksSubscription = this.getTasks().subscribe({complete:()=>{    spinner.hide('loading');
+}});
    })
 }
 setTasks(newValue:any){
 this.$tasks.next(newValue);
 }
 getTasks():Observable<any[]|null>{
-  console.log(this.$selectedOrganizationID());
+  
   if (!this.$selectedOrganizationID()) return of(null);
-  return from(supabase.from('tasks').select('*').eq('organization_id ',this.$selectedOrganizationID())).pipe(
+  this.spinner.hide('loading');
+   if(this.cache.has(this.$selectedOrganizationID())){
+     const data = this.cache.get(this.$selectedOrganizationID())
+     this.$tasks.next(data);
+     this.$filteredTasks.set(data);
+     return of(null);
+   }
+  return from(supabase.from('tasks').select('*').eq('organization_id',this.$selectedOrganizationID())).pipe(
+    tap(({data,error})=>{
+     this.cache.set(this.$selectedOrganizationID(),data);
+    }),
      map(({data,error})=>{
      if (error) throw new Error(error.message ?? "Unknown error");
-     console.log(data);
-     
-     this.$tasks.next(data);
-     this.$filteredTasks.set(this.$tasks.value);
-     console.log(this.$tasks.value);
-     
+   
      return data ??  null;
     }),
     // tap((data)=>{

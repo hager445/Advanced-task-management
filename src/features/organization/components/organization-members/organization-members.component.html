@@ -7,7 +7,7 @@
     <div class="section-header">
       <div class="section-title">
         <i class="fas fa-users"></i>
-        Members of {{$currentOrgMembers()?.[0].organization_name || 'Unknown'}}
+        Members of {{$currentOrgMembers()?.[0]?.organization_name || 'Unknown'}}
       </div>
     </div>
 
