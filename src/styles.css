@@ -11,7 +11,8 @@ body::before {
   left: 0;
   right: 0;
   bottom: 0;
-  background: radial-gradient(
+  background:
+    radial-gradient(
       circle at 20% 80%,
       rgba(120, 119, 198, 0.4) 0%,
       transparent 50%
@@ -43,6 +44,27 @@ body::before {
     transform: translateY(-10px) rotate(-2deg);
   }
 } */
+/* عرض الاسكرول */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+/* الخلفية */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* الجزء اللي بيتحرك */
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 10px;
+}
+
+/* hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
 .modal-overlay {
   position: fixed;
   top: 0;

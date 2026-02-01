@@ -1,71 +1,75 @@
 <!-- Sidebar -->
-<div class="sidebar">
-  <!-- Personal Tasks Section -->
-  <div class="sidebar-section">
-    <div class="section-header">
-      <div class="section-title">
-        <i class="fas fa-user"></i>
-        {{ $selectedOrganization?.name }} Tasks
+<!-- ================================================================= -->
+<aside class="relative">
+  <app-toggle-btn (toggleSidebar)="toggleSidebar()"></app-toggle-btn>
+  <div class="sidebar" [class]="isOpenedSidebar ? 'open-sidebar' : ''">
+    <!-- toggle icon  -->
+    <!-- Personal Tasks Section -->
+    <div class="sidebar-section">
+      <div class="section-header">
+        <div class="section-title">
+          <i class="fas fa-user"></i>
+          {{ $selectedOrganization?.name }} Tasks
+        </div>
       </div>
-    </div>
-    <div
-      routerLinkActive="active"
-      routerLink="/alltasks"
-      class="sidebar-item active"
-    >
-      <i class="fas fa-inbox"></i>
-      <span>All Tasks</span>
-      <span style="margin-left: auto; font-size: 12px; color: #94a3b8">{{
-        $tasks.length
-      }}</span>
-    </div>
-    <div class="sidebar-item">
-      <i class="fas fa-calendar-day"></i>
-      <span>Today</span>
-      <span style="margin-left: auto; font-size: 12px; color: #94a3b8">{{
-        todayTasks().length
-      }}</span>
-    </div>
-    <div class="sidebar-item">
-      <i class="fas fa-clock"></i>
-      <span>Upcoming</span>
-      <span style="margin-left: auto; font-size: 12px; color: #94a3b8">{{
-        upcomingTasks().length
-      }}</span>
-    </div>
-    <app-create-task></app-create-task>
-  </div>
-
-  <!-- Organizations Section -->
-  <div class="sidebar-section">
-    <div class="section-header">
-      <div class="section-title">
-        <i class="fas fa-users"></i>
-        Organizations
+      <div
+        routerLinkActive="active"
+        routerLink="/alltasks"
+        class="sidebar-item active"
+      >
+        <i class="fas fa-inbox"></i>
+        <span>All Tasks</span>
+        <span style="margin-left: auto; font-size: 12px; color: #94a3b8">{{
+          $tasks.length
+        }}</span>
       </div>
-      <app-load-more [forLoadMore]="true"></app-load-more>
-    </div>
-
-    <app-organization-list></app-organization-list>
-
-    <!-- CREATE ORGANIZATION BUTTON -->
-    <app-create-organization></app-create-organization>
-  </div>
-
-  <!-- Categories Section -->
-  <div class="sidebar-section">
-    <div class="section-header">
-      <div class="section-title">
-        <i class="fas fa-folder"></i>
-        Categories
+      <div class="sidebar-item">
+        <i class="fas fa-calendar-day"></i>
+        <span>Today</span>
+        <span style="margin-left: auto; font-size: 12px; color: #94a3b8">{{
+          todayTasks().length
+        }}</span>
       </div>
-      <app-load-more
-        [forLoadMore]="false"
-        (navigateTo)="navigateToList()"
-      ></app-load-more>
+      <div class="sidebar-item">
+        <i class="fas fa-clock"></i>
+        <span>Upcoming</span>
+        <span style="margin-left: auto; font-size: 12px; color: #94a3b8">{{
+          upcomingTasks().length
+        }}</span>
+      </div>
+      <app-create-task></app-create-task>
     </div>
-    <app-category-list [isSideBar]="true"></app-category-list>
-    <!-- <div class="category-item">
+
+    <!-- Organizations Section -->
+    <div class="sidebar-section">
+      <div class="section-header">
+        <div class="section-title">
+          <i class="fas fa-users"></i>
+          Organizations
+        </div>
+        <app-load-more [forLoadMore]="true"></app-load-more>
+      </div>
+
+      <app-organization-list></app-organization-list>
+
+      <!-- CREATE ORGANIZATION BUTTON -->
+      <app-create-organization></app-create-organization>
+    </div>
+
+    <!-- Categories Section -->
+    <div class="sidebar-section">
+      <div class="section-header">
+        <div class="section-title">
+          <i class="fas fa-folder"></i>
+          Categories
+        </div>
+        <app-load-more
+          [forLoadMore]="false"
+          (navigateTo)="navigateToList()"
+        ></app-load-more>
+      </div>
+      <app-category-list [isSideBar]="true"></app-category-list>
+      <!-- <div class="category-item">
       <div class="category-color" style="background: #3b82f6"></div>
       <span>Work</span>
       <span class="category-count">12</span>
@@ -81,29 +85,32 @@
       <span class="category-count">3</span>
     </div> -->
 
-    <app-create-new-category (showForm)="showForm()"></app-create-new-category>
-    <button class="logout-btn" (click)="logout()">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke-width="2"
-        stroke="currentColor"
-        class="icon"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6A2.25 2.25 0 005.25 5.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3-3l3 3m0 0l-3 3m3-3H9"
-        />
-      </svg>
-      <span>Logout</span>
-    </button>
+      <app-create-new-category
+        (showForm)="showForm()"
+      ></app-create-new-category>
+      <button class="logout-btn" (click)="logout()">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="2"
+          stroke="currentColor"
+          class="icon"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6A2.25 2.25 0 005.25 5.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3-3l3 3m0 0l-3 3m3-3H9"
+          />
+        </svg>
+        <span>Logout</span>
+      </button>
 
-    <!-- <button (click)="logout()">logout</button> -->
+      <!-- <button (click)="logout()">logout</button> -->
+    </div>
   </div>
-</div>
 
-<!-- ===================== -->
-<app-organization-modal></app-organization-modal>
-<app-manage-categories #manageC></app-manage-categories>
+  <!-- ===================== -->
+  <app-organization-modal></app-organization-modal>
+  <app-manage-categories #manageC></app-manage-categories>
+</aside>
