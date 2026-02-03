@@ -21,7 +21,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1000;
+  z-index: 9999;
   opacity: 0;
   visibility: hidden;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -51,8 +51,10 @@
   padding: 0;
   width: 100%;
   max-width: 440px;
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5),
-    0 0 0 1px rgba(255, 255, 255, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  box-shadow:
+    0 30px 60px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(255, 255, 255, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
   transform: scale(0.9) translateY(30px);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
@@ -133,7 +135,8 @@
   align-items: center;
   justify-content: center;
   margin: 0 0 5px;
-  box-shadow: 0 12px 24px rgba(102, 126, 234, 0.4),
+  box-shadow:
+    0 12px 24px rgba(102, 126, 234, 0.4),
     inset 0 2px 0 rgba(255, 255, 255, 0.2);
   animation: float 3s ease-in-out infinite;
 }
@@ -216,7 +219,8 @@
 .form-input:focus {
   outline: none;
   border-color: #667eea;
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2),
+  box-shadow:
+    0 0 0 3px rgba(102, 126, 234, 0.2),
     inset 0 2px 4px rgba(0, 0, 0, 0.1);
   background: rgba(255, 255, 255, 0.12);
 }
@@ -308,7 +312,8 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4),
+  box-shadow:
+    0 8px 20px rgba(102, 126, 234, 0.4),
     inset 0 1px 0 rgba(255, 255, 255, 0.2);
   position: relative;
   overflow: hidden;
@@ -338,7 +343,8 @@
 
 .login-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 28px rgba(102, 126, 234, 0.5),
+  box-shadow:
+    0 12px 28px rgba(102, 126, 234, 0.5),
     inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 

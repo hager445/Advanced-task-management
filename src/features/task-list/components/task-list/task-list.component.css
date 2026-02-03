@@ -27,7 +27,7 @@
 /* Task Stats */
 .task-stats {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 20px;
   justify-content: center;
   margin-bottom: 30px;
@@ -53,12 +53,18 @@
   .stat-card {
     width: 85%;
   }
+  .task-stats {
+    flex-wrap: wrap;
+  }
 }
 /* Tablet */
 @media (min-width: 768px) and (max-width: 1023px) {
   /* styles here */
   .stat-card {
     width: 45%;
+  }
+  .task-stats {
+    flex-wrap: wrap;
   }
 }
 .stat-card:hover {
