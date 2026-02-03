@@ -777,7 +777,7 @@
 /* mobile */
 @media (min-width: 320px) and (max-width: 767px) {
   .form-card {
-    padding: 20px;
+    padding: 22px;
   }
   .form-row {
     grid-template-columns: 1fr;
