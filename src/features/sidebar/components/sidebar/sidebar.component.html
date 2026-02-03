@@ -2,7 +2,7 @@
 <!-- ================================================================= -->
 <aside class="relative">
   <app-toggle-btn (toggleSidebar)="toggleSidebar()"></app-toggle-btn>
-  <div class="sidebar" [class]="isOpenedSidebar ? 'open-sidebar' : ''">
+  <div class="sidebar" [class]="isOpenedSidebar() ? 'open-sidebar' : ''">
     <!-- toggle icon  -->
     <!-- Personal Tasks Section -->
     <div class="sidebar-section">

@@ -27,27 +27,44 @@
 /* Task Stats */
 .task-stats {
   display: flex;
+  flex-wrap: wrap;
   gap: 20px;
+  justify-content: center;
   margin-bottom: 30px;
 }
 
 .stat-card {
-  flex: 1;
+  /* flex: 1; */
+  width: 23%;
   background: linear-gradient(135deg, #1e1e3f 0%, #2a2a5a 100%);
   backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 16px;
   padding: 24px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2),
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.2),
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
   position: relative;
   overflow: hidden;
   transition: all 0.3s ease;
 }
-
+/* mobile */
+@media (min-width: 320px) and (max-width: 767px) {
+  .stat-card {
+    width: 85%;
+  }
+}
+/* Tablet */
+@media (min-width: 768px) and (max-width: 1023px) {
+  /* styles here */
+  .stat-card {
+    width: 45%;
+  }
+}
 .stat-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3),
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.3),
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
@@ -134,7 +151,8 @@
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 20px;
   padding: 24px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4),
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.4),
     inset 0 1px 1px rgba(255, 255, 255, 0.05);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
@@ -146,7 +164,8 @@
   transform: translateY(-6px);
   background: rgba(20, 20, 35, 0.5);
   border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5),
+  box-shadow:
+    0 16px 48px rgba(0, 0, 0, 0.5),
     inset 0 1px 1px rgba(255, 255, 255, 0.08);
 }
 
@@ -157,7 +176,8 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: radial-gradient(
+  background:
+    radial-gradient(
       circle at 20% 30%,
       rgba(120, 119, 198, 0.08) 0%,
       transparent 60%
@@ -414,7 +434,8 @@
   backdrop-filter: blur(16px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 20px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4),
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.4),
     inset 0 1px 1px rgba(255, 255, 255, 0.05);
 }
 
@@ -586,7 +607,8 @@
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 12px;
   padding: 8px;
-  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.5),
+  box-shadow:
+    0 20px 48px rgba(0, 0, 0, 0.5),
     0 0 0 1px rgba(255, 255, 255, 0.03),
     inset 0 1px 1px rgba(255, 255, 255, 0.08);
   opacity: 0;

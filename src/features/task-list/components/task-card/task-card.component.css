@@ -6,6 +6,19 @@
 .cubic {
   grid-template-columns: repeat(3, 1fr); /* 3 أعمدة */
 }
+/* mobile */
+@media (min-width: 320px) and (max-width: 767px) {
+  .cubic {
+    grid-template-columns: 1fr; /* 3 أعمدة */
+    /* margin: 0 50px; */
+  }
+}
+/* Tablet */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .cubic {
+    grid-template-columns: repeat(2, 1fr); /* 3 أعمدة */
+  }
+}
 /* ==========================================
        MAIN TASK CARD
        ========================================== */
@@ -32,7 +45,8 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: radial-gradient(
+  background:
+    radial-gradient(
       circle at 20% 30%,
       rgba(120, 119, 198, 0.08) 0%,
       transparent 50%
@@ -67,7 +81,8 @@
   transform: translateY(-8px);
   background: rgba(20, 25, 40, 0.5);
   border-color: rgba(255, 255, 255, 0.12);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4),
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.4),
     inset 0 1px 1px rgba(255, 255, 255, 0.08);
 }
 

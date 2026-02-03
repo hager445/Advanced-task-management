@@ -19,6 +19,7 @@ import { CategoryListComponent } from '../../../task categories/components/categ
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../auth/services/auth/auth.service';
 import { ToggleBtnComponent } from '../../../../shared/components/toggle-btn/toggle-btn.component';
+import { CloseopenmodelsService } from '../../../../shared/services/closeopenmodels/closeopenmodels.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -38,8 +39,10 @@ import { ToggleBtnComponent } from '../../../../shared/components/toggle-btn/tog
   styleUrl: './sidebar.component.css',
 })
 export class SidebarComponent {
-  isOpenedSidebar: boolean = false;
   categoriesRouterLink: string = '/categories';
+  isOpenedSidebar = computed(() =>
+    this.closeopenmodalService.$isOpened['sidebar'](),
+  );
   $selectedOrganizationID = computed(() =>
     this.organizationService.orgSystemID.selectedOrganizationID(),
   );
@@ -54,6 +57,7 @@ export class SidebarComponent {
     private tasksService: TaskService,
     private Router: Router,
     private authService: AuthService,
+    private closeopenmodalService: CloseopenmodelsService,
   ) {
     this.tasksService.$tasksObservable.subscribe((tasks) => {
       this.$tasks = tasks;
@@ -79,7 +83,9 @@ export class SidebarComponent {
     this.Router.navigate([this.categoriesRouterLink]);
   }
   toggleSidebar() {
-    this.isOpenedSidebar = !this.isOpenedSidebar;
+    this.closeopenmodalService.$isOpened['sidebar'].update(
+      (isOpened) => !isOpened,
+    );
   }
   logout() {
     this.authService.logout().subscribe({
