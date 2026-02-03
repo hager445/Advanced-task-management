@@ -101,14 +101,16 @@
 
 .dropdown-trigger:hover {
   border-color: #667eea;
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1),
+  box-shadow:
+    0 0 0 3px rgba(102, 126, 234, 0.1),
     inset 0 2px 4px rgba(0, 0, 0, 0.1);
   background: rgba(255, 255, 255, 0.12);
 }
 
 .dropdown-trigger.open {
   border-color: #667eea;
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2),
+  box-shadow:
+    0 0 0 3px rgba(102, 126, 234, 0.2),
     inset 0 2px 4px rgba(0, 0, 0, 0.1);
   background: rgba(255, 255, 255, 0.12);
 }
@@ -186,8 +188,10 @@
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 12px;
   padding: 8px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5),
-    0 0 0 1px rgba(255, 255, 255, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(255, 255, 255, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
   max-height: 400px;
   overflow-y: auto;
 }
@@ -306,7 +310,7 @@
 
 /* NO RESULTS MESSAGE */
 .no-results {
-  padding: 24px;
+  padding: 12px 24px;
   text-align: center;
   color: #94a3b8;
   font-size: 14px;
@@ -371,4 +375,17 @@
 
 .dropdown-menu::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.3);
+}
+/* mobile */
+@media (min-width: 320px) and (max-width: 767px) {
+  .add-member-btn {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+  .no-results {
+    padding: 0;
+  }
+}
+/* Tablet */
+@media (min-width: 768px) and (max-width: 1023px) {
 }
